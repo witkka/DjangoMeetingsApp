@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}New meeting{% endblock %}
+
+{% block content %}
+<h1>New meeting</h1>
+{% if user.is_authenticated %}
+    <form method="POST">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+        <div class="'form-group">
+            <label for="'{{ field.id_for_label }}">{{field.label}}</label>
+            {{field|add_class:'form-control'}}
+            {% for error in field.errors %}
+            <li>
+                <span class= "text-danger">{{error}}</span>
+            </li>
+            {% endfor %}
+        </div>
+        <br>
+    {% endfor %}
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% else %}
+<hr>
+<h3>Only logged-in users can create new meetings.</h3>
+{% endif %}
+{% endblock %}

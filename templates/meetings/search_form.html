@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}index{% endblock %}
+
+{% block content %}
+<main role="main" class="container">
+  <h3>Seach meetings</h3>
+  <form id="filterMeetings" role="search" method="GET" action="{% url 'search' %}">
+    <div class="form-row">
+      <div class="form-group col-12">
+        <div class="input-group">
+          <input class="form-control" type="search" name="title_contains" placeholder="title contains" />
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-12">
+        <div class="input-group">
+          <input class="form-control" type="search" name="author" placeholder="author..." />
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="room">Room</label>
+        <select id="room" class="form-control" name="room">
+          <option selected>Choose room</option>
+          {% for room in rooms %}
+          <option value="{{ room }}">{{ room }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group .col-sm-">
+        <label for="meetingDateMin">date: from</label>
+        <input type="date" class="form-control" id="meetingDateMin" name="date_min">
+      </div>
+      <div class="form-group .col-sm-">
+        <label for="meetingDateMax">date: to</label>
+        <input type="date" class="form-control" id="meetingDateMax" name="date_max">
+      </div>
+      <div class="form-group .col-sm-">
+        <label for="meetingTimeMin">time: from</label>
+        <input type="time" class="form-control" id="meetingTimeMin" name="time_min">
+      </div>
+      <div class="form-group .col-sm-">
+        <label for="meetingTimeMax">time: to</label>
+        <input type="time" class="form-control" id="meetingTimeMax" name="time_max">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <hr>
+
+  <div class="row">
+    <ul>
+      {% for meeting in queryset %}
+      <li>
+        <a href="/meetings/{{meeting.id}}">{{ meeting.title }}
+        <span>, author: {{ meeting.author }}</span>
+        <span>, room:    {{ meeting.room }}</span>
+        <span>date: {{ meeting.date }},</span>
+        <span>{{ meeting.start_time }}-{{ meeting.end_time }}</span></a>
+      </li>
+      <hr>
+      {% endfor %}
+    </ul>
+  </div>
+
+    </main>
+
+{%{% endblock %}

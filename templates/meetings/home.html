@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <h3>Hello {{ user.username }}</h3>
+    <br>
+    {% if meetings_today.all|length == 0 %}
+        <p>You don't have any meetings planned for today.</p>
+    {% else %}
+        {% for meeting in meetings_today %}
+            <a href="/meetings/{{meeting.id}}">{{meeting}}</a>
+        {% endfor %}
+    {% endif %}
+
+{% else %}
+<p>You are not a logged-in user. Some features can bo restricted.</p>
+{% endif %}
+{% endblock %}
