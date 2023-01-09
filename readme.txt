@@ -2,7 +2,6 @@
 meetings_app api, version '1.0.0', March, 2022.
 This is README.txt,  user guide.
 Author: Katarzyna Witkowska, https://github.com/witkka
-Demo: https://powerful-shore-26063.herokuapp.com/
 =========================================================================
 
 Simple django app for creating, editing, deleting and viewing meetings.
